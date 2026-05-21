@@ -3,14 +3,10 @@
 
 using namespace std;
 
-int main() {
 
-    string s_file_name = "sudoku.txt";
+bool sudo_load(string s_file_name, int s_matrix[9][9]){
 
     int m_size = 9;
-
-    // Crea la matriz para guardar info
-    int s_matrix[m_size][m_size];
     
     // Se usa para abrir el archivo txt
     ifstream s_file(s_file_name);
@@ -18,7 +14,7 @@ int main() {
     // Verifica si se abrio
     if (!s_file.is_open()) {
         cerr << "Error: No se pudo abrir el archivo '" << s_file_name << "'." << endl;
-        return 1;
+        return false;
     }
     
     // Buclecito anidado para guardar la info en la matriz
@@ -49,5 +45,24 @@ int main() {
         cout << endl;
     }
     
+    return true;
+
+}
+
+
+
+int main() {
+
+    // Crea la matriz para guardar info
+    int s_matrix[9][9];
+
+    // Name del doc
+    string s_file_name = "sudoku.txt";
+    
+    if (!sudo_load(s_file_name, s_matrix)) {
+        cerr << "Error: No se pudo cargar el sudoku." << endl;
+        return 1;
+    }
+
     return 0;
 }
